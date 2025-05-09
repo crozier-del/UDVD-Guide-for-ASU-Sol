@@ -124,11 +124,11 @@ All the denoising tasks are run as supercomputer jobs on ASU Sol. Here is an exa
 
 module purge
 module load mamba/latest
-source activate denoised-env
+source activate denoise-HDR
 
 ### Part 3
 
-python denoise_mf.py --data "/scratch/ywan1240/PtCeO2_030303.tif.npy"
+python denoise_mf.py --data "/scratch/ywan1240/PtCeO2_030303.tif"
 ```
 
 As we can see, the file has 3 parts, let's take a look part by part. The first part can be considered as the request for computer resource. The lines marked with comments are the lines needs to be adjusted if necessary.
@@ -143,7 +143,7 @@ The second part is preparing the environment. Nothing needed to be changed here.
 The third part is the actual command for denoising. What it does is using python to run a file called `denoise_mf.py` with a bunch of options.
 
 The options include:
-- **(required)**`--data $PATH_TO_FILE` : Full path to the `.tif` file containing the video to be denoised.
+- **(required)**`--data $PATH_TO_FILE` : Full path to the `.tif` or `.npy` file containing the video to be denoised.
 - `--output-file $PATH_TO_OUTPUT_FILE` : Full path of the output file without filename extension. It will save at the same location with an extension of `_udvd_mf` by default.
 - `--fourdim` : Set if data is 4D.
 - `--include-neighbor` : Set if not blinding neighbors.
@@ -153,7 +153,7 @@ The options include:
 - `--image-size $NUM`: Size of the square image patches used for training (default: 256).
 - `--multiply $NUM` : Multiply the data by an integer to manually normalize the data (default: 1).
 
-In this case, the denoiser is going to denoise a file called `PtCeO2_030303.tif.npy` in the `scratch` folder of user `ywan1240`.
+In this case, the denoiser is going to denoise a file called `PtCeO2_030303.tif` in the `scratch` folder of user `ywan1240`.
 
 It is recommended to edit the `.sh` file in VS Code. You can also edit it in text editor. However, in that case, if a windows PC is used, an extra commands need to be run:
 
